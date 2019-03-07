@@ -9,7 +9,7 @@
 package team.greenstudio.modules.oss.controller;
 
 import com.google.gson.Gson;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.ConfigConstant;
 import team.greenstudio.common.utils.Constant;
 import team.greenstudio.common.utils.PageUtils;
@@ -104,7 +104,7 @@ public class SysOssController {
     @RequiresPermissions("sys:oss:all")
     public R upload(@RequestParam("file") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
-            throw new RRException("上传文件不能为空");
+            throw new GSException("上传文件不能为空");
         }
 
         //上传文件

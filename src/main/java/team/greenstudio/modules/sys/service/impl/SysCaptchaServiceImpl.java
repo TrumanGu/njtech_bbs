@@ -12,7 +12,7 @@ package team.greenstudio.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.code.kaptcha.Producer;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.DateUtils;
 import team.greenstudio.modules.sys.dao.SysCaptchaDao;
 import team.greenstudio.modules.sys.entity.SysCaptchaEntity;
@@ -37,7 +37,7 @@ public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptcha
     @Override
     public BufferedImage getCaptcha(String uuid) {
         if (StringUtils.isBlank(uuid)) {
-            throw new RRException("uuid不能为空");
+            throw new GSException("uuid不能为空");
         }
         //生成文字验证码
         String code = producer.createText();

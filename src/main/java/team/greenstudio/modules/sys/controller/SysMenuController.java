@@ -9,7 +9,7 @@
 package team.greenstudio.modules.sys.controller;
 
 import team.greenstudio.common.annotation.SysLog;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.Constant;
 import team.greenstudio.common.utils.R;
 import team.greenstudio.modules.sys.entity.SysMenuEntity;
@@ -150,17 +150,17 @@ public class SysMenuController extends AbstractController {
      */
     private void verifyForm(SysMenuEntity menu) {
         if (StringUtils.isBlank(menu.getName())) {
-            throw new RRException("菜单名称不能为空");
+            throw new GSException("菜单名称不能为空");
         }
 
         if (menu.getParentId() == null) {
-            throw new RRException("上级菜单不能为空");
+            throw new GSException("上级菜单不能为空");
         }
 
         //菜单
         if (menu.getType() == Constant.MenuType.MENU.getValue()) {
             if (StringUtils.isBlank(menu.getUrl())) {
-                throw new RRException("菜单URL不能为空");
+                throw new GSException("菜单URL不能为空");
             }
         }
 
@@ -175,7 +175,7 @@ public class SysMenuController extends AbstractController {
         if (menu.getType() == Constant.MenuType.CATALOG.getValue() ||
                 menu.getType() == Constant.MenuType.MENU.getValue()) {
             if (parentType != Constant.MenuType.CATALOG.getValue()) {
-                throw new RRException("上级菜单只能为目录类型");
+                throw new GSException("上级菜单只能为目录类型");
             }
             return;
         }
@@ -183,7 +183,7 @@ public class SysMenuController extends AbstractController {
         //按钮
         if (menu.getType() == Constant.MenuType.BUTTON.getValue()) {
             if (parentType != Constant.MenuType.MENU.getValue()) {
-                throw new RRException("上级菜单只能为菜单类型");
+                throw new GSException("上级菜单只能为菜单类型");
             }
             return;
         }
