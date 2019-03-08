@@ -50,6 +50,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .forCodeGeneration(false)
                 .pathMapping("/")
                 .select()
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .build()
                 .apiInfo(apiInfo());
     }

@@ -29,10 +29,11 @@ import java.util.logging.Logger;
  * APP登录授权
  *
  * @author Mark sunlightcs@gmail.com
+ * @author Radoapx 84225343@qq.com
  */
 @RestController
 @RequestMapping("/app")
-@Api("APP登录接口")
+@Api(value="用户controller",tags={"app用户账户操作"})
 public class AppLoginController {
     @Autowired
     private UserService userService;
@@ -42,8 +43,8 @@ public class AppLoginController {
     /**
      * 登录
      */
+    @ApiOperation("用户登陆接口")
     @PostMapping("login")
-    @ApiOperation("登录")
     public R login(LoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
