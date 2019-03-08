@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.common.exception;
 
 import team.greenstudio.common.utils.R;
@@ -18,19 +10,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
- * 异常处理器
- *
- * @author Mark sunlightcs@gmail.com
+ * @apiNote 自定义异常处理器
+ * @author TrumanGu trumangu1998@gmail.com
  */
 @RestControllerAdvice
-public class RRExceptionHandler {
+public class GSExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 处理自定义异常
      */
-    @ExceptionHandler(RRException.class)
-    public R handleRRException(RRException e) {
+    @ExceptionHandler(GSException.class)
+    public R handleGSException(GSException e) {
         R r = new R();
         r.put("code", e.getCode());
         r.put("msg", e.getMessage());
@@ -47,18 +38,18 @@ public class RRExceptionHandler {
     @ExceptionHandler(DuplicateKeyException.class)
     public R handleDuplicateKeyException(DuplicateKeyException e) {
         logger.error(e.getMessage(), e);
-        return R.error("数据库中已存在该记录");
+        return R.error("数据重复" + e.toString());
     }
 
     @ExceptionHandler(AuthorizationException.class)
     public R handleAuthorizationException(AuthorizationException e) {
         logger.error(e.getMessage(), e);
-        return R.error("没有权限，请联系管理员授权");
+        return R.error("权限不足" + e.toString());
     }
 
     @ExceptionHandler(Exception.class)
     public R handleException(Exception e) {
         logger.error(e.getMessage(), e);
-        return R.error();
+        return R.error("未知错误" + e.toString());
     }
 }

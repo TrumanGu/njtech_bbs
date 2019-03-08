@@ -8,7 +8,7 @@
 
 package team.greenstudio.modules.sys.oauth2;
 
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 
 import java.security.MessageDigest;
 import java.util.UUID;
@@ -46,7 +46,7 @@ public class TokenGenerator {
             byte[] messageDigest = algorithm.digest();
             return toHexString(messageDigest);
         } catch (Exception e) {
-            throw new RRException("生成Token失败", e);
+            throw new GSException("生成Token失败", e);
         }
     }
 }

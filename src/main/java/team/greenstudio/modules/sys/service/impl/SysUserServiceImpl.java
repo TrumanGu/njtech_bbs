@@ -11,7 +11,7 @@ package team.greenstudio.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.Constant;
 import team.greenstudio.common.utils.PageUtils;
 import team.greenstudio.common.utils.Query;
@@ -139,7 +139,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
         //判断是否越权
         if (!roleIdList.containsAll(user.getRoleIdList())) {
-            throw new RRException("新增用户所选角色，不是本人创建");
+            throw new GSException("新增用户所选角色，不是本人创建");
         }
     }
 }

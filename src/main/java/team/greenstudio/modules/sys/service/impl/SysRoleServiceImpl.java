@@ -11,7 +11,7 @@ package team.greenstudio.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.Constant;
 import team.greenstudio.common.utils.PageUtils;
 import team.greenstudio.common.utils.Query;
@@ -118,7 +118,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 
         //判断是否越权
         if (!menuIdList.containsAll(role.getMenuIdList())) {
-            throw new RRException("新增角色的权限，已超出你的权限范围");
+            throw new GSException("新增角色的权限，已超出你的权限范围");
         }
     }
 }

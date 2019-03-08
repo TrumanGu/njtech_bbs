@@ -11,7 +11,7 @@ package team.greenstudio.modules.app.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.validator.Assert;
 import team.greenstudio.modules.app.dao.UserDao;
 import team.greenstudio.modules.app.entity.UserEntity;
@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 
         //密码错误
         if (!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))) {
-            throw new RRException("手机号或密码错误");
+            throw new GSException("手机号或密码错误");
         }
 
         return user.getUserId();

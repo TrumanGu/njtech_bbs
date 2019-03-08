@@ -8,7 +8,7 @@
 
 package team.greenstudio.common.validator;
 
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -20,13 +20,13 @@ public abstract class Assert {
 
     public static void isBlank(String str, String message) {
         if (StringUtils.isBlank(str)) {
-            throw new RRException(message);
+            throw new GSException(message);
         }
     }
 
     public static void isNull(Object object, String message) {
         if (object == null) {
-            throw new RRException(message);
+            throw new GSException(message);
         }
     }
 }

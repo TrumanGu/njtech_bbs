@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
-import team.greenstudio.common.exception.RRException;
+import team.greenstudio.common.exception.GSException;
 import team.greenstudio.common.utils.PageUtils;
 import team.greenstudio.common.utils.Query;
 import team.greenstudio.modules.sys.dao.SysConfigDao;
@@ -98,7 +98,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
         try {
             return clazz.newInstance();
         } catch (Exception e) {
-            throw new RRException("获取参数失败");
+            throw new GSException("获取参数失败");
         }
     }
 }
