@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Shiro配置
  *
- * @author Mark sunlightcs@gmail.com
+ * @author TrumanGu trumanGu1998@gmail.com
  */
 @Configuration
 public class ShiroConfig {
@@ -58,7 +58,7 @@ public class ShiroConfig {
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-ui.html", "anon");
         filterMap.put("/swagger-resources/**", "anon");
-        filterMap.put("/captcha.jpg", "anon");
+        filterMap.put("/captcha", "anon");
         filterMap.put("/aaa.txt", "anon");
         filterMap.put("/**", "oauth2");
         shiroFilter.setFilterChainDefinitionMap(filterMap);

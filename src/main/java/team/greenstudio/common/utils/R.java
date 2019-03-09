@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @apiNote 自定义返回数据
  * @author TrumanGu trumangu1998@gmail.com
+ * @apiNote 自定义返回数据
  */
 public class R extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;

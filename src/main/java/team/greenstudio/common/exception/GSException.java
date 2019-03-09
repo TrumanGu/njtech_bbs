@@ -1,8 +1,8 @@
 package team.greenstudio.common.exception;
 
 /**
- * @apiNote 自定义异常类
  * @author TrumanGu trumangu1998@gmail.com
+ * @apiNote 自定义异常类
  */
 public class GSException extends RuntimeException {
     private static final long serialVersionUID = 1L;

@@ -45,7 +45,6 @@ team\greenstudio\modules\sys\service\impl\ShiroServiceImpl.class
 team\greenstudio\modules\sys\controller\SysRoleController.class
 team\greenstudio\common\utils\RedisUtils.class
 team\greenstudio\common\validator\Assert.class
-team\greenstudio\common\exception\RRException.class
 team\greenstudio\modules\sys\service\impl\SysConfigServiceImpl.class
 team\greenstudio\modules\app\service\UserService.class
 team\greenstudio\modules\sys\service\impl\SysLogServiceImpl.class
@@ -64,7 +63,6 @@ team\greenstudio\datasource\config\DynamicDataSourceConfig.class
 team\greenstudio\modules\job\service\ScheduleJobLogService.class
 team\greenstudio\modules\app\resolver\LoginUserHandlerMethodArgumentResolver.class
 team\greenstudio\modules\app\service\impl\UserServiceImpl.class
-team\greenstudio\common\exception\RRExceptionHandler.class
 team\greenstudio\modules\sys\service\impl\SysCaptchaServiceImpl.class
 team\greenstudio\modules\sys\dao\SysMenuDao.class
 team\greenstudio\modules\sys\dao\SysLogDao.class
