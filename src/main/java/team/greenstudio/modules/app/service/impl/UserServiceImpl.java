@@ -33,6 +33,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
     public long login(LoginForm form) {
         UserEntity user = queryByMobile(form.getMobile());
         Assert.isNull(user, "手机号或密码错误");
+//        System.out.println("database:"+user.getPassword());
+//        System.out.println("input:"+form.getPassword());
+//        System.out.println("input 64:"+DigestUtils.sha256Hex(form.getPassword()));
 
         //密码错误
         if (!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))) {

@@ -30,7 +30,23 @@ public class RegisterForm {
     @NotBlank(message = "密码不能为空")
     private String password;
 
-    @ApiModelProperty(value = "邮箱地址")
-    @NotBlank(message = "邮箱地址不能为空")
-    private String email;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+//    @ApiModelProperty(value = "邮箱地址")
+//    @NotBlank(message = "邮箱地址不能为空")
+//    private String email;
 }

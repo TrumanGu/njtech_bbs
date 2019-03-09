@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.modules.app.controller;
 
 
@@ -48,11 +40,8 @@ public class AppLoginController {
     public R login(LoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
-
         //用户登录
         long userId = userService.login(form);
-
-        Logger.getLogger(userId + "");
         //生成token
         String token = jwtUtils.generateToken(userId);
 
@@ -62,5 +51,4 @@ public class AppLoginController {
 
         return R.ok(map);
     }
-
 }
