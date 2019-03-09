@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 /**
- * @apiNote 自定义异常处理器
  * @author TrumanGu trumangu1998@gmail.com
+ * @apiNote 自定义异常处理器
  */
 @RestControllerAdvice
 public class GSExceptionHandler {
