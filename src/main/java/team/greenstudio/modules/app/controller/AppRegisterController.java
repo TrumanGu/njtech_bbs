@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import team.greenstudio.modules.app.mailVerify.*;
 import java.util.Date;
 
 /**
@@ -35,28 +35,24 @@ import java.util.Date;
 @RequestMapping("/app")
 @Api(value="用户controller",tags={"app用户账户操作"})
 public class AppRegisterController {
+    @Autowired
+    private UserService userService;
 
     @ApiOperation("用户注册接口")
     @PostMapping("register")
     public R register(RegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
-        //电话号码合法性检查
-        if(! LegalityCheck.PhoneLegalityCheck(form.getMobile()) )
-            return R.error("手机号码格式有误！");
 
         UserEntity user = new UserEntity();
-        user.setMobile(form.getMobile());
-        user.setUsername(form.getMobile());
+        user.setUser_email(form.getUser_email());
+        user.setUsername(form.getUser_email());
         user.setPassword(DigestUtils.sha256Hex(form.getPassword()));
         user.setCreateTime(new Date());
         userService.save(user);
 
         return R.ok();
     }
-
-    @Autowired
-    private UserService userService;
 }
 
 

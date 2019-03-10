@@ -21,7 +21,7 @@ import team.greenstudio.modules.app.form.LoginForm;
 public interface UserService extends IService<UserEntity> {
 
     UserEntity queryByMobile(String mobile);
-
+    UserEntity queryByEmail(String email);
     /**
      * 用户登录
      *
@@ -29,4 +29,6 @@ public interface UserService extends IService<UserEntity> {
      * @return 返回用户ID
      */
     long login(LoginForm form);
+
+    boolean saveUUID();
 }

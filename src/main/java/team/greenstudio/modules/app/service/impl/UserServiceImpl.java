@@ -1,14 +1,4 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.modules.app.service.impl;
-
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import team.greenstudio.common.exception.GSException;
@@ -19,8 +9,9 @@ import team.greenstudio.modules.app.form.LoginForm;
 import team.greenstudio.modules.app.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
-
-
+/**
+ * @author radoapx 845225343@qq.com
+ */
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements UserService {
 
@@ -28,20 +19,25 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
     public UserEntity queryByMobile(String mobile) {
         return baseMapper.selectOne(new QueryWrapper<UserEntity>().eq("mobile", mobile));
     }
+    @Override
+    public UserEntity queryByEmail(String email) {
+        return baseMapper.selectOne(new QueryWrapper<UserEntity>().eq("user_email", email));
+    }
 
     @Override
     public long login(LoginForm form) {
-        UserEntity user = queryByMobile(form.getMobile());
-        Assert.isNull(user, "手机号或密码错误");
-//        System.out.println("database:"+user.getPassword());
-//        System.out.println("input:"+form.getPassword());
-//        System.out.println("input 64:"+DigestUtils.sha256Hex(form.getPassword()));
 
-        //密码错误
+        UserEntity user = queryByEmail(form.getUser_email());
+        Assert.isNull(user, "邮箱错误!");
+
         if (!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))) {
-            throw new GSException("手机号或密码错误");
+            throw new GSException("密码错误!");
         }
-
         return user.getUserId();
+    }
+
+    @Override
+    public boolean saveUUID() {
+        return false;
     }
 }

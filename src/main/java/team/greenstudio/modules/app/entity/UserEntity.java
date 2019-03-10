@@ -38,11 +38,16 @@ public class UserEntity implements Serializable {
     /**
      * 手机号
      */
-    private String mobile;
+    //private String mobile;
     /**
      * 密码
      */
     private String password;
+
+    /**
+     *邮箱
+     */
+    private String user_email;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -64,13 +69,13 @@ public class UserEntity implements Serializable {
         this.username = username;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+//    public String getMobile() {
+//        return mobile;
+//    }
+//
+//    public void setMobile(String mobile) {
+//        this.mobile = mobile;
+//    }
 
     public String getPassword() {
         return password;
@@ -91,5 +96,14 @@ public class UserEntity implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 }
