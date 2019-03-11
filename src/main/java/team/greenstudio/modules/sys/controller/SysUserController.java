@@ -1,13 +1,9 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.modules.sys.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import team.greenstudio.common.annotation.SysLog;
 import team.greenstudio.common.utils.Constant;
 import team.greenstudio.common.utils.PageUtils;
@@ -32,10 +28,11 @@ import java.util.Map;
 /**
  * 系统用户
  *
- * @author Mark sunlightcs@gmail.com
+ * @author trumangu trumangu1998@gmail.com
  */
 @RestController
 @RequestMapping("/sys/user")
+@Api(value = "ApiValue", tags = {"后台系统接口"})
 public class SysUserController extends AbstractController {
     @Autowired
     private SysUserService sysUserService;
@@ -66,21 +63,29 @@ public class SysUserController extends AbstractController {
         return R.ok().put("user", getUser());
     }
 
-    /**
-     * 修改登录用户密码
-     */
-    @SysLog("修改密码")
+
+
     @PostMapping("/password")
-    public R password(@RequestBody PasswordForm form) {
-        Assert.isBlank(form.getNewPassword(), "新密码不为能空");
+    @SysLog("修改密码")
+    @ApiOperation("后台用户修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "prePassword", value = "旧密码", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "newPassword", value = "新密码", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "confirm", value = "确认密码", required = true, dataType = "String")
+    })
+    public R password(@RequestParam(value = "prePassword") String prePassword,
+                      @RequestParam(value = "newPassword") String newPassword,
+                      @RequestParam(value = "confirm") String confirm) {
+        Assert.isBlank(newPassword, "新密码不为能空");
+        Assert.isEqual(newPassword, confirm, "两次密码输入不一致");
 
         //sha256加密
-        String password = new Sha256Hash(form.getPassword(), getUser().getSalt()).toHex();
+        String encryptedPassword = new Sha256Hash(prePassword, getUser().getSalt()).toHex();
         //sha256加密
-        String newPassword = new Sha256Hash(form.getNewPassword(), getUser().getSalt()).toHex();
+        String newEncryptedPassword = new Sha256Hash(newPassword, getUser().getSalt()).toHex();
 
         //更新密码
-        boolean flag = sysUserService.updatePassword(getUserId(), password, newPassword);
+        boolean flag = sysUserService.updatePassword(getUserId(), encryptedPassword, newEncryptedPassword);
         if (!flag) {
             return R.error("原密码不正确");
         }
@@ -93,6 +98,8 @@ public class SysUserController extends AbstractController {
      */
     @GetMapping("/info/{userId}")
     @RequiresPermissions("sys:user:info")
+    @ApiOperation("后台查询用户个人信息")
+    @ApiImplicitParam(paramType="query", name = "userId", value = "查询的用户id", required = true, dataType = "Long")
     public R info(@PathVariable("userId") Long userId) {
         SysUserEntity user = sysUserService.getById(userId);
 

@@ -1,20 +1,11 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.common.validator;
 
 import team.greenstudio.common.exception.GSException;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 数据校验
- *
- * @author Mark sunlightcs@gmail.com
+ * 对数据进行校验
+ * @author trumangu trumangu1998@gmail.com
  */
 public abstract class Assert {
 
@@ -26,6 +17,12 @@ public abstract class Assert {
 
     public static void isNull(Object object, String message) {
         if (object == null) {
+            throw new GSException(message);
+        }
+    }
+
+    public static void isEqual(Object object1, Object object2, String message) {
+        if (!object1.equals(object2)) {
             throw new GSException(message);
         }
     }

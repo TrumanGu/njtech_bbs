@@ -16,7 +16,7 @@ import java.util.Map;
  * @author TrumanGu trumangu1998@gmail.com
  */
 
-@Api(value = "ApiValue", tags = {"后台系统接口"})
+@Api(description = "有关后台操作的接口", tags = {"后台系统接口"})
 @RestController
 public class SysLoginController extends AbstractController {
 
