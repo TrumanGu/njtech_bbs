@@ -22,13 +22,13 @@ import javax.validation.constraints.NotBlank;
 @Data
 @ApiModel(value = "登录表单")
 public class LoginForm {
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+//    public String getMobile() {
+//        return mobile;
+//    }
+//
+//    public void setMobile(String mobile) {
+//        this.mobile = mobile;
+//    }
 
     public String getPassword() {
         return password;
@@ -38,12 +38,24 @@ public class LoginForm {
         this.password = password;
     }
 
-    @ApiModelProperty(value = "手机号")
-    @NotBlank(message = "手机号不能为空")
-    private String mobile;
+//    @ApiModelProperty(value = "手机号")
+//    @NotBlank(message = "手机号不能为空")
+//    private String mobile;
 
     @ApiModelProperty(value = "密码")
     @NotBlank(message = "密码不能为空")
     private String password;
 
+    @ApiModelProperty(value = "邮箱地址")
+    @NotBlank(message = "邮箱地址不能为空")
+    private String user_email;
+
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
 }
