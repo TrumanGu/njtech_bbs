@@ -1,6 +1,7 @@
 package team.greenstudio.modules.app.controller;
 
 
+import team.greenstudio.common.utils.LegalityCheck;
 import team.greenstudio.common.utils.R;
 import team.greenstudio.common.validator.ValidatorUtils;
 import team.greenstudio.modules.app.form.LoginForm;
@@ -40,6 +41,8 @@ public class AppLoginController {
     public R login(LoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
+        //邮箱检查
+        if(!LegalityCheck.EmailLegalityCheck(form.getUser_email())) return R.error("邮箱有误!");
         //用户登录
         long userId = userService.login(form);
         //生成token

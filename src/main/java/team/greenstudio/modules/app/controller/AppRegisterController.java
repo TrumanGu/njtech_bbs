@@ -1,14 +1,4 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
 package team.greenstudio.modules.app.controller;
-
-
 import io.swagger.annotations.ApiOperation;
 import team.greenstudio.common.utils.LegalityCheck;
 import team.greenstudio.common.utils.R;
@@ -22,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import team.greenstudio.modules.app.mailVerify.*;
 import java.util.Date;
 
 /**
@@ -43,6 +32,8 @@ public class AppRegisterController {
     public R register(RegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);
+        //邮箱检查
+        if(!LegalityCheck.EmailLegalityCheck(form.getUser_email())) return R.error("邮箱有误!");
 
         UserEntity user = new UserEntity();
         user.setUser_email(form.getUser_email());

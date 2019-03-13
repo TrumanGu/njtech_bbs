@@ -1,5 +1,4 @@
-package team.greenstudio.modules.app.mailVerify;
-
+package team.greenstudio.modules.app.controller;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Properties;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -22,19 +20,17 @@ import javax.mail.internet.MimeMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import team.greenstudio.common.utils.LegalityCheck;
-//@RestController
+import team.greenstudio.common.utils.R;
+
+/**
+ * 发送邮件
+ *
+ * @author Radoapx 84225343@qq.com
+ */
+@RestController
 @RequestMapping("/app")
 @Api(value="用户controller",tags={"app用户账户操作"})
-public class MailVerify implements Runnable {
-
-    private String email;// 收件人邮箱
-    private String code;// 激活码
-
-    public MailVerify(String email, String code) {
-        this.email = email;
-        this.code = code;
-    }
-
+public class AppMailController  {
     /**
      *
      * @param email 该用户输入的验证邮箱
@@ -42,22 +38,12 @@ public class MailVerify implements Runnable {
      */
     @ApiOperation("发送邮件接口")
     @PostMapping("sendEmail")
-    public static boolean sendEmail(String email) {
-        //生成激活码
-        // String code= UUID.randomUUID().toString().replaceAll("-","");//uuid效验码
-//        User user=new User(userName,email,password,0,code);
-        //将用户保存到数据库
-//        UserDao userDao=new UserDaoImpl();
-        //保存成功则通过线程的方式给用户发送一封邮件
-        String code=getRandomCode();
-        new Thread(new MailVerify(email, code)).start();
-        return true;
-    }
-
-    public void run() {
+    public R sendEmail(String email) {
         // 1.创建连接对象javax.mail.Session
         // 2.创建邮件对象 javax.mail.Message
         // 3.发送一封激活邮件
+        if(!LegalityCheck.EmailLegalityCheck(email)) return R.error("邮箱格式错误!");
+        String code=getRandomCode();//生成验证码
         String from = "845225343@qq.com";// 发件人电子邮箱
         String host = "smtp.qq.com"; // 指定发送邮件的主机smtp.qq.com(QQ)|smtp.163.com(网易)
 
@@ -95,10 +81,10 @@ public class MailVerify implements Runnable {
             message.setContent(content, "text/html;charset=UTF-8");
             // 3.发送邮件
             Transport.send(message);
-            System.out.println("邮件成功发送!");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return R.ok(code);
     }
 
     /**

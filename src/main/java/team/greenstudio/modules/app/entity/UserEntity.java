@@ -22,7 +22,7 @@ import java.util.Date;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-@TableName("tb_user")
+@TableName("bbs_user")
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class UserEntity implements Serializable {
     /**
      * 手机号
      */
-    //private String mobile;
+    private String mobile;
     /**
      * 密码
      */
@@ -69,13 +69,13 @@ public class UserEntity implements Serializable {
         this.username = username;
     }
 
-//    public String getMobile() {
-//        return mobile;
-//    }
-//
-//    public void setMobile(String mobile) {
-//        this.mobile = mobile;
-//    }
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public String getPassword() {
         return password;

@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 public class LegalityCheck {
 
     /**
-     * @param String类型的11位phoneNumber
-     * @return true合法
+     * @param String phoneNumber
+     * @return true ifLegal
      */
     public static boolean PhoneLegalityCheck(String phoneNumber) {
         System.out.println(phoneNumber.substring(0, 1));
